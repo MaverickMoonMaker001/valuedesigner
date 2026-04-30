@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { prepareWithSegments, layoutNextLineRange, materializeLineRange } from "@chenglou/pretext";
+import { useState, useEffect, useRef } from "react";
 
 // ── Aurora palette ────────────────────────────────────────────────
 const A = {
@@ -12,202 +11,6 @@ const A = {
 };
 
 const BOOKING_URL = "https://calendar.app.google/L56EZxL43HpdCawa6";
-
-const HERO_BODY = "Vibe coding moves fast. But speed without signal is just building in the dark. Most founders can't tell the difference between what their app does and the value a user actually gets from it. That gap is why you don't have traction. I only need 15 minutes to show you where it is.";
-const BODY_FONT = "17px DM Mono";
-const LINE_HEIGHT = 31;
-const CURSOR_RADIUS = 52;
-
-function CursorText({ style = {} }) {
-  const canvasRef = useRef(null);
-  const cursorRef = useRef({ x: -999, y: -999 });
-  const preparedRef = useRef(null);
-  const rafRef = useRef(null);
-  const containerRef = useRef(null);
-
-  const draw = useCallback(() => {
-    const canvas = canvasRef.current;
-    const container = containerRef.current;
-    if (!canvas || !container || !preparedRef.current) return;
-
-    const dpr = window.devicePixelRatio || 1;
-    const W = container.offsetWidth;
-    const totalLines = Math.ceil((canvas.offsetHeight) / LINE_HEIGHT);
-    const H = totalLines * LINE_HEIGHT;
-
-    if (canvas.offsetWidth !== W) {
-      canvas.style.width = W + "px";
-      canvas.style.height = H + "px";
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
-    }
-
-    const ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.scale(dpr, dpr);
-
-    ctx.font = BODY_FONT;
-    ctx.fillStyle = "rgba(240,236,228,0.55)";
-    ctx.textBaseline = "top";
-
-    const cx = cursorRef.current.x;
-    const cy = cursorRef.current.y;
-    const r = CURSOR_RADIUS;
-
-    let cursor = { segmentIndex: 0, graphemeIndex: 0 };
-    let y = 0;
-
-    while (true) {
-      // Band: y to y + LINE_HEIGHT
-      // Compute horizontal exclusion of cursor circle in this band
-      const bandTop = y;
-      const bandMid = y + LINE_HEIGHT / 2;
-      const dy = bandMid - cy;
-      const underCircle = Math.abs(dy) < r;
-
-      let leftX = 0;
-      let rightX = W;
-      let split = false;
-
-      if (underCircle) {
-        const halfChord = Math.sqrt(r * r - dy * dy);
-        const cLeft = cx - halfChord;
-        const cRight = cx + halfChord;
-
-        // Determine layout strategy based on where cursor sits horizontally
-        if (cRight <= 0 || cLeft >= W) {
-          // Cursor entirely outside — full width
-        } else if (cLeft <= 0) {
-          // Cursor clips left edge — text starts after circle
-          leftX = Math.min(cRight + 4, W);
-        } else if (cRight >= W) {
-          // Cursor clips right edge — text ends before circle
-          rightX = Math.max(cLeft - 4, 0);
-        } else {
-          // Cursor in middle — render left segment then right
-          split = true;
-          const leftWidth = Math.max(0, cLeft - 4);
-          const rightWidth = Math.max(0, W - cRight - 4);
-
-          // Render left chunk
-          if (leftWidth > 20) {
-            const rangeL = layoutNextLineRange(preparedRef.current, cursor, leftWidth);
-            if (rangeL === null) break;
-            const lineL = materializeLineRange(preparedRef.current, rangeL);
-            ctx.fillText(lineL.text, 0, y + 2);
-            cursor = rangeL.end;
-          }
-
-          // Render right chunk from same cursor position (re-run)
-          if (rightWidth > 20) {
-            const savedCursor = { ...cursor };
-            const rangeR = layoutNextLineRange(preparedRef.current, savedCursor, rightWidth);
-            if (rangeR === null) break;
-            const lineR = materializeLineRange(preparedRef.current, rangeR);
-            ctx.fillText(lineR.text, cRight + 4, y + 2);
-            // advance cursor by the longer range
-            cursor = rangeR.end;
-          }
-
-          y += LINE_HEIGHT;
-          ctx.setTransform(1, 0, 0, 1, 0, 0);
-          ctx.scale(dpr, dpr);
-          continue;
-        }
-      }
-
-      if (!split) {
-        const w = rightX - leftX;
-        if (w < 10) { y += LINE_HEIGHT; continue; }
-        const range = layoutNextLineRange(preparedRef.current, cursor, w);
-        if (range === null) break;
-        const line = materializeLineRange(preparedRef.current, range);
-        ctx.fillText(line.text, leftX, y + 2);
-        cursor = range.end;
-      }
-
-      y += LINE_HEIGHT;
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr);
-
-      if (y > H + LINE_HEIGHT * 2) break;
-    }
-
-    // Draw subtle cursor glow
-    if (cx > 0 && cy > 0 && cx < W && cy < (H + 40)) {
-      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-      grad.addColorStop(0, "rgba(0,232,184,0.10)");
-      grad.addColorStop(0.5, "rgba(0,232,184,0.04)");
-      grad.addColorStop(1, "transparent");
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(cx, cy, r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }, []);
-
-  // Prepare text once fonts load
-  useEffect(() => {
-    const prepare = () => {
-      preparedRef.current = prepareWithSegments(HERO_BODY, BODY_FONT);
-      draw();
-    };
-    if (document.fonts) {
-      document.fonts.ready.then(prepare);
-    } else {
-      setTimeout(prepare, 300);
-    }
-  }, [draw]);
-
-  // Track global mouse, translate to canvas-local coords
-  useEffect(() => {
-    const onMove = (e) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
-      cursorRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(draw);
-    };
-    const onLeave = () => {
-      cursorRef.current = { x: -999, y: -999 };
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(draw);
-    };
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseleave", onLeave);
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseleave", onLeave);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [draw]);
-
-  // Resize observer
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const ro = new ResizeObserver(() => {
-      const canvas = canvasRef.current;
-      if (canvas) {
-        canvas.width = 0;
-        canvas.height = 0;
-      }
-      requestAnimationFrame(draw);
-    });
-    ro.observe(container);
-    return () => ro.disconnect();
-  }, [draw]);
-
-  return (
-    <div ref={containerRef} style={{ position: "relative", marginBottom: 52, ...style }}>
-      <canvas
-        ref={canvasRef}
-        style={{ display: "block", width: "100%", height: 220 }}
-      />
-    </div>
-  );
-}
 
 function Inner({ children, style = {} }) {
   return (
@@ -401,7 +204,23 @@ export default function App() {
               <em className="aurora-text">Not solving problems.</em>
             </h1>
 
-            <CursorText />
+            <p style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 17,
+              lineHeight: 1.85, color: "rgba(240,236,228,0.55)",
+              marginBottom: 16,
+            }}>
+              Vibe coding moves fast. But speed without signal is just building in the dark.
+              Most founders can't tell the difference between what their app does
+              and the value a user actually gets from it. That gap is why you don't have traction.
+            </p>
+
+            <p style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 17,
+              lineHeight: 1.85, color: "rgba(240,236,228,0.55)",
+              marginBottom: 52,
+            }}>
+              I only need 15 minutes to show you where it is.
+            </p>
 
             <BookButton />
 
