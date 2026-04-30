@@ -24,7 +24,7 @@ function BookButton({ label = "Book a free 15-min call →", style = {} }) {
       onMouseLeave={() => setHov(false)}
       style={{
         fontFamily: "'DM Mono', monospace",
-        fontSize: 11,
+        fontSize: 14,
         letterSpacing: "0.12em",
         textTransform: "uppercase",
         background: hov ? A.grad : A.teal,
@@ -47,7 +47,7 @@ function Label({ children, color }) {
   return (
     <p style={{
       fontFamily: "'DM Mono', monospace",
-      fontSize: 10,
+      fontSize: 13,
       letterSpacing: "0.15em",
       textTransform: "uppercase",
       color: color || A.teal,
@@ -152,7 +152,7 @@ export default function App() {
         }}>
           ValueDesigner
         </span>
-        <BookButton label="Book a free call →" style={{ padding: "10px 22px", fontSize: 10 }} />
+        <BookButton label="Book a free call →" style={{ padding: "10px 22px", fontSize: 13 }} />
       </nav>
 
       {/* ── HERO ── */}
@@ -168,7 +168,7 @@ export default function App() {
           transition: "opacity 1s ease 0.1s, transform 1s ease 0.1s",
         }}>
           <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 11,
+            fontFamily: "'DM Mono', monospace", fontSize: 14,
             letterSpacing: "0.15em", textTransform: "uppercase",
             color: A.teal, marginBottom: 32,
           }}>
@@ -186,7 +186,7 @@ export default function App() {
           </h1>
 
           <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 14,
+            fontFamily: "'DM Mono', monospace", fontSize: 17,
             lineHeight: 1.85, color: "rgba(240,236,228,0.55)",
             maxWidth: 500, marginBottom: 16,
           }}>
@@ -196,7 +196,7 @@ export default function App() {
           </p>
 
           <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 14,
+            fontFamily: "'DM Mono', monospace", fontSize: 17,
             lineHeight: 1.85, color: "rgba(240,236,228,0.55)",
             maxWidth: 500, marginBottom: 52,
           }}>
@@ -206,7 +206,7 @@ export default function App() {
           <BookButton />
 
           <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 11,
+            fontFamily: "'DM Mono', monospace", fontSize: 14,
             color: "rgba(240,236,228,0.22)", marginTop: 16, letterSpacing: "0.05em",
           }}>
             Free. No pitch. You'll leave with something useful.
@@ -251,7 +251,7 @@ export default function App() {
                 background: dim ? "rgba(240,236,228,0.01)" : "rgba(0,232,184,0.04)",
               }}>
                 <p style={{
-                  fontFamily: "'DM Mono', monospace", fontSize: 10,
+                  fontFamily: "'DM Mono', monospace", fontSize: 13,
                   letterSpacing: "0.15em", textTransform: "uppercase",
                   color: dim ? "rgba(240,236,228,0.25)" : A.teal,
                   marginBottom: 20,
@@ -266,7 +266,7 @@ export default function App() {
           </div>
 
           <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 13,
+            fontFamily: "'DM Mono', monospace", fontSize: 16,
             lineHeight: 1.85, color: "rgba(240,236,228,0.4)", maxWidth: 500,
           }}>
             This isn't a failure of execution. It's a missing conversation — between what you're
@@ -292,7 +292,7 @@ export default function App() {
             Identify the gap.<br />Design to close it.
           </h2>
           <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 13,
+            fontFamily: "'DM Mono', monospace", fontSize: 16,
             lineHeight: 1.85, color: "rgba(240,236,228,0.4)",
             maxWidth: 480, marginBottom: 60,
           }}>
@@ -334,7 +334,7 @@ export default function App() {
                   fontSize: 22, fontWeight: 700, marginBottom: 12, color,
                 }}>{title}</h3>
                 <p style={{
-                  fontFamily: "'DM Mono', monospace", fontSize: 13,
+                  fontFamily: "'DM Mono', monospace", fontSize: 16,
                   lineHeight: 1.8, color: "rgba(240,236,228,0.45)",
                 }}>{body}</p>
               </div>
@@ -380,12 +380,12 @@ export default function App() {
             ].map(({ step, color, body }) => (
               <div key={step} style={{ padding: "36px 28px" }}>
                 <p style={{
-                  fontFamily: "'DM Mono', monospace", fontSize: 10,
+                  fontFamily: "'DM Mono', monospace", fontSize: 13,
                   letterSpacing: "0.15em", textTransform: "uppercase",
                   color, marginBottom: 16,
                 }}>{step}</p>
                 <p style={{
-                  fontFamily: "'DM Mono', monospace", fontSize: 13,
+                  fontFamily: "'DM Mono', monospace", fontSize: 16,
                   lineHeight: 1.8, color: "rgba(240,236,228,0.5)",
                 }}>{body}</p>
               </div>
@@ -412,7 +412,7 @@ export default function App() {
             Stop shipping into the void.
           </h2>
           <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 13,
+            fontFamily: "'DM Mono', monospace", fontSize: 16,
             lineHeight: 1.85, color: "rgba(240,236,228,0.45)",
             maxWidth: 440, marginBottom: 44,
           }}>
@@ -421,7 +421,7 @@ export default function App() {
           </p>
           <BookButton />
           <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 11,
+            fontFamily: "'DM Mono', monospace", fontSize: 14,
             color: "rgba(240,236,228,0.2)", marginTop: 16, letterSpacing: "0.05em",
           }}>
             Or reach out directly:{" "}
@@ -443,7 +443,7 @@ export default function App() {
           Value<span className="aurora-text">Designer</span>
         </span>
         <span style={{
-          fontFamily: "'DM Mono', monospace", fontSize: 10,
+          fontFamily: "'DM Mono', monospace", fontSize: 13,
           letterSpacing: "0.1em", color: "rgba(240,236,228,0.18)",
           textTransform: "uppercase",
         }}>
