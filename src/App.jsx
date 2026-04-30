@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import BlurText from "./components/BlurText";
 
 // ── Aurora palette ────────────────────────────────────────────────
 const A = {
@@ -96,11 +97,6 @@ function Fade({ children }) {
 }
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 80);
-    return () => clearTimeout(t);
-  }, []);
 
   return (
     <div style={{
@@ -180,47 +176,71 @@ export default function App() {
         display: "flex", flexDirection: "column", justifyContent: "center",
       }}>
         <Inner style={{ paddingTop: 140, paddingBottom: 100 }}>
-          <div style={{
-            opacity: loaded ? 1 : 0,
-            transform: loaded ? "none" : "translateY(24px)",
-            transition: "opacity 1s ease 0.1s, transform 1s ease 0.1s",
-            maxWidth: 680,
-          }}>
-            <p style={{
+          <div style={{ maxWidth: 680 }}>
+            <div style={{
               fontFamily: "'DM Mono', monospace", fontSize: 14,
               letterSpacing: "0.15em", textTransform: "uppercase",
               color: A.teal, marginBottom: 32,
             }}>
-              For founders building with AI
-            </p>
+              <BlurText
+                text="For founders building with AI"
+                delay={80}
+                direction="top"
+                stepDuration={0.3}
+              />
+            </div>
 
-            <h1 style={{
+            <div style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(40px, 5.5vw, 72px)",
               fontWeight: 900, lineHeight: 1.08,
               letterSpacing: "-0.02em", marginBottom: 36,
             }}>
-              You're shipping features.<br />
-              <em className="aurora-text">Not solving problems.</em>
-            </h1>
+              <BlurText
+                text="You're shipping features."
+                delay={60}
+                direction="top"
+                stepDuration={0.4}
+              />
+              <BlurText
+                text="Not solving problems."
+                delay={60}
+                direction="top"
+                stepDuration={0.4}
+                animationFrom={{ filter: 'blur(10px)', opacity: 0, y: -40 }}
+                animationTo={[
+                  { filter: 'blur(5px)', opacity: 0.5, y: 4 },
+                  { filter: 'blur(0px)', opacity: 1, y: 0 },
+                ]}
+                className="aurora-text"
+              />
+            </div>
 
-            <p style={{
+            <div style={{
               fontFamily: "'DM Mono', monospace", fontSize: 17,
               lineHeight: 1.85, color: "rgba(240,236,228,0.55)",
               marginBottom: 16,
             }}>
-              Vibe coding moves fast. But speed without signal is just building in the dark.
-              Most founders can't tell the difference between what their app does
-              and the value a user actually gets from it. That gap is why you don't have traction.
-            </p>
+              <BlurText
+                text="Vibe coding moves fast. But speed without signal is just building in the dark. Most founders can't tell the difference between what their app does and the value a user actually gets from it. That gap is why you don't have traction."
+                delay={18}
+                direction="bottom"
+                stepDuration={0.3}
+              />
+            </div>
 
-            <p style={{
+            <div style={{
               fontFamily: "'DM Mono', monospace", fontSize: 17,
               lineHeight: 1.85, color: "rgba(240,236,228,0.55)",
               marginBottom: 52,
             }}>
-              I only need 15 minutes to show you where it is.
-            </p>
+              <BlurText
+                text="I only need 15 minutes to show you where it is."
+                delay={25}
+                direction="bottom"
+                stepDuration={0.3}
+              />
+            </div>
 
             <BookButton />
 
