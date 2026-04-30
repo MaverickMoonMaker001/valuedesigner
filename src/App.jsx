@@ -11,7 +11,7 @@ const A = {
 };
 
 // ── TODO: Replace with your real Calendly (or other) booking URL ──
-const BOOKING_URL = "https://calendly.com/valuedesigner";
+const BOOKING_URL = "https://calendar.app.google/L56EZxL43HpdCawa6";
 
 function BookButton({ label = "Book a free 15-min call →", style = {} }) {
   const [hov, setHov] = useState(false);
