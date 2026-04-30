@@ -13,9 +13,9 @@ const A = {
 
 const BOOKING_URL = "https://calendar.app.google/L56EZxL43HpdCawa6";
 
-function Inner({ children, style = {} }) {
+function Inner({ children, style = {}, className = "" }) {
   return (
-    <div className="inner-wrap" style={{
+    <div className={`inner-wrap ${className}`} style={{
       maxWidth: 920,
       margin: "0 auto",
       padding: "0 48px",
@@ -125,6 +125,7 @@ export default function App() {
           .three-col { grid-template-columns: 1fr !important; }
           .nav-inner { padding: 18px 24px !important; }
           .work-item { grid-template-columns: 48px 1fr !important; }
+          .hero-inner { padding-top: 100px !important; padding-bottom: 72px !important; }
         }
       `}</style>
 
@@ -175,7 +176,7 @@ export default function App() {
         position: "relative", zIndex: 1,
         display: "flex", flexDirection: "column", justifyContent: "center",
       }}>
-        <Inner style={{ paddingTop: 140, paddingBottom: 100 }}>
+        <Inner className="hero-inner" style={{ paddingTop: 140, paddingBottom: 100 }}>
           <div style={{ maxWidth: 680 }}>
             <div style={{
               fontFamily: "'DM Mono', monospace", fontSize: 14,
