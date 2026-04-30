@@ -6,12 +6,24 @@ const A = {
   violet:   "#a78bfa",
   green:    "#4ade80",
   grad:     "linear-gradient(120deg, #00e8b8 0%, #a78bfa 100%)",
-  gradSoft: "linear-gradient(120deg, rgba(0,232,184,0.15) 0%, rgba(167,139,250,0.15) 100%)",
+  gradSoft: "linear-gradient(120deg, rgba(0,232,184,0.12) 0%, rgba(167,139,250,0.12) 100%)",
   glowT:    "0 0 24px rgba(0,232,184,0.35)",
 };
 
-// ── TODO: Replace with your real Calendly (or other) booking URL ──
 const BOOKING_URL = "https://calendar.app.google/L56EZxL43HpdCawa6";
+
+function Inner({ children, style = {} }) {
+  return (
+    <div className="inner-wrap" style={{
+      maxWidth: 920,
+      margin: "0 auto",
+      padding: "0 48px",
+      ...style,
+    }}>
+      {children}
+    </div>
+  );
+}
 
 function BookButton({ label = "Book a free 15-min call →", style = {} }) {
   const [hov, setHov] = useState(false);
@@ -111,11 +123,12 @@ export default function App() {
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
+          .inner-wrap { padding: 0 24px !important; }
           .two-col { grid-template-columns: 1fr !important; }
           .three-col { grid-template-columns: 1fr !important; }
           .nav-inner { padding: 18px 24px !important; }
-          .section-pad { padding: 72px 24px !important; }
+          .work-item { grid-template-columns: 48px 1fr !important; }
         }
       `}</style>
 
@@ -132,323 +145,339 @@ export default function App() {
       {/* ── NAV ── */}
       <nav className="nav-inner" style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        padding: "22px 48px",
         background: "rgba(7,8,15,0.88)",
         backdropFilter: "blur(12px)",
         borderBottom: "1px solid rgba(0,232,184,0.08)",
       }}>
-        <span style={{
-          fontFamily: "'Playfair Display', serif",
-          fontWeight: 700,
-          fontSize: 15,
-          letterSpacing: "0.18em",
-          textTransform: "uppercase",
-          background: "linear-gradient(120deg, #00e8b8 0%, #38bdf8 40%, #a78bfa 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-          filter: "drop-shadow(0 0 8px rgba(0,232,184,0.5))",
-        }}>
-          ValueDesigner
-        </span>
-        <BookButton label="Book a free call →" style={{ padding: "10px 22px", fontSize: 13 }} />
+        <Inner style={{ padding: "0 48px" }}>
+          <div style={{
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+            height: 68,
+          }}>
+            <span style={{
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 700,
+              fontSize: 15,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              background: "linear-gradient(120deg, #00e8b8 0%, #38bdf8 40%, #a78bfa 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              filter: "drop-shadow(0 0 8px rgba(0,232,184,0.5))",
+            }}>
+              ValueDesigner
+            </span>
+            <BookButton label="Book a free call →" style={{ padding: "10px 22px", fontSize: 13 }} />
+          </div>
+        </Inner>
       </nav>
 
       {/* ── HERO ── */}
-      <section className="section-pad" style={{
-        minHeight: "100vh", position: "relative", zIndex: 1,
+      <section style={{
+        minHeight: "100vh", width: "100%",
+        position: "relative", zIndex: 1,
         display: "flex", flexDirection: "column", justifyContent: "center",
-        padding: "120px 48px 80px",
-        maxWidth: 860,
       }}>
-        <div style={{
-          opacity: loaded ? 1 : 0,
-          transform: loaded ? "none" : "translateY(24px)",
-          transition: "opacity 1s ease 0.1s, transform 1s ease 0.1s",
-        }}>
-          <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 14,
-            letterSpacing: "0.15em", textTransform: "uppercase",
-            color: A.teal, marginBottom: 32,
+        <Inner style={{ paddingTop: 140, paddingBottom: 100 }}>
+          <div style={{
+            opacity: loaded ? 1 : 0,
+            transform: loaded ? "none" : "translateY(24px)",
+            transition: "opacity 1s ease 0.1s, transform 1s ease 0.1s",
+            maxWidth: 680,
           }}>
-            For founders building with AI
-          </p>
+            <p style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 14,
+              letterSpacing: "0.15em", textTransform: "uppercase",
+              color: A.teal, marginBottom: 32,
+            }}>
+              For founders building with AI
+            </p>
 
-          <h1 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(42px, 6vw, 72px)",
-            fontWeight: 900, lineHeight: 1.08,
-            letterSpacing: "-0.02em", marginBottom: 36,
-          }}>
-            You're shipping features.<br />
-            <em className="aurora-text">Not solving problems.</em>
-          </h1>
+            <h1 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(40px, 5.5vw, 72px)",
+              fontWeight: 900, lineHeight: 1.08,
+              letterSpacing: "-0.02em", marginBottom: 36,
+            }}>
+              You're shipping features.<br />
+              <em className="aurora-text">Not solving problems.</em>
+            </h1>
 
-          <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 17,
-            lineHeight: 1.85, color: "rgba(240,236,228,0.55)",
-            maxWidth: 500, marginBottom: 16,
-          }}>
-            Vibe coding moves fast. But speed without signal is just building in the dark.
-            Most founders can't tell the difference between what their app does
-            and the value a user actually gets from it. That gap is why you don't have traction.
-          </p>
+            <p style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 17,
+              lineHeight: 1.85, color: "rgba(240,236,228,0.55)",
+              marginBottom: 16,
+            }}>
+              Vibe coding moves fast. But speed without signal is just building in the dark.
+              Most founders can't tell the difference between what their app does
+              and the value a user actually gets from it. That gap is why you don't have traction.
+            </p>
 
-          <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 17,
-            lineHeight: 1.85, color: "rgba(240,236,228,0.55)",
-            maxWidth: 500, marginBottom: 52,
-          }}>
-            I only need 15 minutes to show you where it is.
-          </p>
+            <p style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 17,
+              lineHeight: 1.85, color: "rgba(240,236,228,0.55)",
+              marginBottom: 52,
+            }}>
+              I only need 15 minutes to show you where it is.
+            </p>
 
-          <BookButton />
+            <BookButton />
 
-          <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 14,
-            color: "rgba(240,236,228,0.22)", marginTop: 16, letterSpacing: "0.05em",
-          }}>
-            Free. No pitch. You'll leave with something useful.
-          </p>
-        </div>
+            <p style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 14,
+              color: "rgba(240,236,228,0.22)", marginTop: 16, letterSpacing: "0.05em",
+            }}>
+              Free. No pitch. You'll leave with something useful.
+            </p>
+          </div>
+        </Inner>
       </section>
 
       {/* ── THE PROBLEM ── */}
       <Fade>
-        <section className="section-pad" style={{
-          padding: "100px 48px", maxWidth: 860,
+        <section style={{
+          width: "100%", position: "relative", zIndex: 1,
           borderTop: "1px solid rgba(0,232,184,0.08)",
-          position: "relative", zIndex: 1,
         }}>
-          <Label>The problem</Label>
-          <h2 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(30px, 4vw, 46px)",
-            fontWeight: 700, lineHeight: 1.15, marginBottom: 48,
-          }}>
-            Features are not value.
-          </h2>
+          <Inner style={{ paddingTop: 100, paddingBottom: 100 }}>
+            <Label>The problem</Label>
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(28px, 4vw, 46px)",
+              fontWeight: 700, lineHeight: 1.15, marginBottom: 48,
+            }}>
+              Features are not value.
+            </h2>
 
-          <div className="two-col" style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr",
-            gap: 1, background: "rgba(0,232,184,0.06)", marginBottom: 56,
-          }}>
-            {[
-              {
-                label: "What you think you built",
-                body: "An AI tool that automates X. A dashboard that shows Y. A feature that does Z faster.",
-                dim: true,
-              },
-              {
-                label: "What your user actually needs",
-                body: "To feel confident in a decision. To stop losing money on a problem. To do their job without thinking about your tool.",
-                dim: false,
-              },
-            ].map(({ label, body, dim }) => (
-              <div key={label} style={{
-                padding: "40px 36px",
-                background: dim ? "rgba(240,236,228,0.01)" : "rgba(0,232,184,0.04)",
-              }}>
-                <p style={{
-                  fontFamily: "'DM Mono', monospace", fontSize: 13,
-                  letterSpacing: "0.15em", textTransform: "uppercase",
-                  color: dim ? "rgba(240,236,228,0.25)" : A.teal,
-                  marginBottom: 20,
-                }}>{label}</p>
-                <p style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontStyle: "italic", fontSize: 18, lineHeight: 1.65,
-                  color: dim ? "rgba(240,236,228,0.3)" : "rgba(240,236,228,0.85)",
-                }}>{body}</p>
-              </div>
-            ))}
-          </div>
+            <div className="two-col" style={{
+              display: "grid", gridTemplateColumns: "1fr 1fr",
+              gap: 1, background: "rgba(0,232,184,0.06)", marginBottom: 56,
+            }}>
+              {[
+                {
+                  label: "What you think you built",
+                  body: "An AI tool that automates X. A dashboard that shows Y. A feature that does Z faster.",
+                  dim: true,
+                },
+                {
+                  label: "What your user actually needs",
+                  body: "To feel confident in a decision. To stop losing money on a problem. To do their job without thinking about your tool.",
+                  dim: false,
+                },
+              ].map(({ label, body, dim }) => (
+                <div key={label} style={{
+                  padding: "40px 36px",
+                  background: dim ? "rgba(240,236,228,0.01)" : "rgba(0,232,184,0.04)",
+                }}>
+                  <p style={{
+                    fontFamily: "'DM Mono', monospace", fontSize: 13,
+                    letterSpacing: "0.15em", textTransform: "uppercase",
+                    color: dim ? "rgba(240,236,228,0.25)" : A.teal,
+                    marginBottom: 20,
+                  }}>{label}</p>
+                  <p style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontStyle: "italic", fontSize: 19, lineHeight: 1.65,
+                    color: dim ? "rgba(240,236,228,0.3)" : "rgba(240,236,228,0.85)",
+                  }}>{body}</p>
+                </div>
+              ))}
+            </div>
 
-          <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 16,
-            lineHeight: 1.85, color: "rgba(240,236,228,0.4)", maxWidth: 500,
-          }}>
-            This isn't a failure of execution. It's a missing conversation — between what you're
-            building and what someone actually needs. That's a solvable problem.
-            It just requires the right tools and the right questions.
-          </p>
+            <p style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 16,
+              lineHeight: 1.85, color: "rgba(240,236,228,0.4)", maxWidth: 560,
+            }}>
+              This isn't a failure of execution. It's a missing conversation — between what you're
+              building and what someone actually needs. That's a solvable problem.
+              It just requires the right tools and the right questions.
+            </p>
+          </Inner>
         </section>
       </Fade>
 
       {/* ── THE WORK ── */}
       <Fade>
-        <section className="section-pad" style={{
-          padding: "100px 48px", maxWidth: 860,
+        <section style={{
+          width: "100%", position: "relative", zIndex: 1,
           borderTop: "1px solid rgba(167,139,250,0.08)",
-          position: "relative", zIndex: 1,
         }}>
-          <Label color={A.violet}>The work</Label>
-          <h2 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(30px, 4vw, 46px)",
-            fontWeight: 700, lineHeight: 1.15, marginBottom: 20,
-          }}>
-            Identify the gap.<br />Design to close it.
-          </h2>
-          <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 16,
-            lineHeight: 1.85, color: "rgba(240,236,228,0.4)",
-            maxWidth: 480, marginBottom: 60,
-          }}>
-            Less guessing. Less wasted tokens. Less building in circles.
-            A clear value proposition changes what you prioritize, what you ship,
-            and how users talk about you.
-          </p>
-
-          {[
-            {
-              n: "01", color: A.teal,
-              title: "Surface the real pain",
-              body: "Separate what users say from what they actually feel. Explicit pains get you acquired. Latent pains keep users around. Most founders only see one.",
-            },
-            {
-              n: "02", color: A.violet,
-              title: "Audit the gap",
-              body: "Map what your product delivers against what users are actually getting. This is the exercise most teams never run — and it's exactly where lost traction hides.",
-            },
-            {
-              n: "03", color: A.green,
-              title: "Build a value story worth shipping toward",
-              body: "A clear, testable proposition that your roadmap can point to. Before the next feature. Before the next sprint.",
-            },
-          ].map(({ n, color, title, body }) => (
-            <div key={n} style={{
-              display: "grid", gridTemplateColumns: "60px 1fr",
-              gap: 24, marginBottom: 44, paddingBottom: 44,
-              borderBottom: "1px solid rgba(240,236,228,0.05)",
+          <Inner style={{ paddingTop: 100, paddingBottom: 100 }}>
+            <Label color={A.violet}>The work</Label>
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(28px, 4vw, 46px)",
+              fontWeight: 700, lineHeight: 1.15, marginBottom: 20,
             }}>
-              <span style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: 28, fontWeight: 900,
-                color, opacity: 0.4, lineHeight: 1, paddingTop: 4,
-              }}>{n}</span>
-              <div>
-                <h3 style={{
+              Identify the gap.<br />Design to close it.
+            </h2>
+            <p style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 16,
+              lineHeight: 1.85, color: "rgba(240,236,228,0.4)",
+              maxWidth: 520, marginBottom: 60,
+            }}>
+              Less guessing. Less wasted tokens. Less building in circles.
+              A clear value proposition changes what you prioritize, what you ship,
+              and how users talk about you.
+            </p>
+
+            {[
+              {
+                n: "01", color: A.teal,
+                title: "Surface the real pain",
+                body: "Separate what users say from what they actually feel. Explicit pains get you acquired. Latent pains keep users around. Most founders only see one.",
+              },
+              {
+                n: "02", color: A.violet,
+                title: "Audit the gap",
+                body: "Map what your product delivers against what users are actually getting. This is the exercise most teams never run — and it's exactly where lost traction hides.",
+              },
+              {
+                n: "03", color: A.green,
+                title: "Build a value story worth shipping toward",
+                body: "A clear, testable proposition that your roadmap can point to. Before the next feature. Before the next sprint.",
+              },
+            ].map(({ n, color, title, body }) => (
+              <div key={n} className="work-item" style={{
+                display: "grid", gridTemplateColumns: "72px 1fr",
+                gap: 24, marginBottom: 44, paddingBottom: 44,
+                borderBottom: "1px solid rgba(240,236,228,0.05)",
+              }}>
+                <span style={{
                   fontFamily: "'Playfair Display', serif",
-                  fontSize: 22, fontWeight: 700, marginBottom: 12, color,
-                }}>{title}</h3>
-                <p style={{
-                  fontFamily: "'DM Mono', monospace", fontSize: 16,
-                  lineHeight: 1.8, color: "rgba(240,236,228,0.45)",
-                }}>{body}</p>
+                  fontSize: 28, fontWeight: 900,
+                  color, opacity: 0.4, lineHeight: 1, paddingTop: 4,
+                }}>{n}</span>
+                <div>
+                  <h3 style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: 22, fontWeight: 700, marginBottom: 12, color,
+                  }}>{title}</h3>
+                  <p style={{
+                    fontFamily: "'DM Mono', monospace", fontSize: 16,
+                    lineHeight: 1.8, color: "rgba(240,236,228,0.45)",
+                  }}>{body}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </Inner>
         </section>
       </Fade>
 
       {/* ── THE FREE CALL ── */}
       <Fade>
-        <section className="section-pad" style={{
-          padding: "100px 48px", maxWidth: 860,
+        <section style={{
+          width: "100%", position: "relative", zIndex: 1,
           borderTop: "1px solid rgba(74,222,128,0.08)",
           background: A.gradSoft,
-          position: "relative", zIndex: 1,
         }}>
-          <Label>The free call</Label>
-          <h2 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(28px, 3.5vw, 40px)",
-            fontWeight: 700, lineHeight: 1.2, marginBottom: 48,
-          }}>
-            15 minutes.<br />You'll leave with clarity.
-          </h2>
+          <Inner style={{ paddingTop: 100, paddingBottom: 100 }}>
+            <Label>The free call</Label>
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(26px, 3.5vw, 42px)",
+              fontWeight: 700, lineHeight: 1.2, marginBottom: 48,
+            }}>
+              15 minutes.<br />You'll leave with clarity.
+            </h2>
 
-          <div className="three-col" style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-            gap: 1, background: "rgba(0,232,184,0.06)", marginBottom: 48,
-          }}>
-            {[
-              {
-                step: "On the call", color: A.teal,
-                body: "We talk about what you're building, who it's for, and what you think they're getting from it. I ask the questions most people skip.",
-              },
-              {
-                step: "After the call", color: A.violet,
-                body: "You get a written report — a plain-language breakdown of where your value gap is and what to think about next.",
-              },
-              {
-                step: "What it costs", color: A.green,
-                body: "Nothing. This is how I work. If it's useful, you'll know. No pressure to continue.",
-              },
-            ].map(({ step, color, body }) => (
-              <div key={step} style={{ padding: "36px 28px" }}>
-                <p style={{
-                  fontFamily: "'DM Mono', monospace", fontSize: 13,
-                  letterSpacing: "0.15em", textTransform: "uppercase",
-                  color, marginBottom: 16,
-                }}>{step}</p>
-                <p style={{
-                  fontFamily: "'DM Mono', monospace", fontSize: 16,
-                  lineHeight: 1.8, color: "rgba(240,236,228,0.5)",
-                }}>{body}</p>
-              </div>
-            ))}
-          </div>
+            <div className="three-col" style={{
+              display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
+              gap: 1, background: "rgba(0,232,184,0.06)", marginBottom: 48,
+            }}>
+              {[
+                {
+                  step: "On the call", color: A.teal,
+                  body: "We talk about what you're building, who it's for, and what you think they're getting from it. I ask the questions most people skip.",
+                },
+                {
+                  step: "After the call", color: A.violet,
+                  body: "You get a written report — a plain-language breakdown of where your value gap is and what to think about next.",
+                },
+                {
+                  step: "What it costs", color: A.green,
+                  body: "Nothing. This is how I work. If it's useful, you'll know. No pressure to continue.",
+                },
+              ].map(({ step, color, body }) => (
+                <div key={step} style={{ padding: "36px 28px" }}>
+                  <p style={{
+                    fontFamily: "'DM Mono', monospace", fontSize: 13,
+                    letterSpacing: "0.15em", textTransform: "uppercase",
+                    color, marginBottom: 16,
+                  }}>{step}</p>
+                  <p style={{
+                    fontFamily: "'DM Mono', monospace", fontSize: 16,
+                    lineHeight: 1.8, color: "rgba(240,236,228,0.5)",
+                  }}>{body}</p>
+                </div>
+              ))}
+            </div>
 
-          <BookButton />
+            <BookButton />
+          </Inner>
         </section>
       </Fade>
 
       {/* ── FINAL CTA ── */}
       <Fade>
-        <section className="section-pad" style={{
-          padding: "100px 48px 120px", maxWidth: 860,
+        <section style={{
+          width: "100%", position: "relative", zIndex: 1,
           borderTop: "1px solid rgba(167,139,250,0.08)",
-          position: "relative", zIndex: 1,
         }}>
-          <h2 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(32px, 4.5vw, 52px)",
-            fontWeight: 900, lineHeight: 1.1,
-            letterSpacing: "-0.02em", marginBottom: 24,
-          }}>
-            Stop shipping into the void.
-          </h2>
-          <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 16,
-            lineHeight: 1.85, color: "rgba(240,236,228,0.45)",
-            maxWidth: 440, marginBottom: 44,
-          }}>
-            If you're building with real intent but no traction — or burning tokens on features
-            nobody asked for — one conversation can change the direction.
-          </p>
-          <BookButton />
-          <p style={{
-            fontFamily: "'DM Mono', monospace", fontSize: 14,
-            color: "rgba(240,236,228,0.2)", marginTop: 16, letterSpacing: "0.05em",
-          }}>
-            Or reach out directly:{" "}
-            <a href="mailto:john@valuedesigner.io" style={{ color: A.teal, textDecoration: "none" }}>
-              john@valuedesigner.io
-            </a>
-          </p>
+          <Inner style={{ paddingTop: 100, paddingBottom: 120 }}>
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(30px, 4.5vw, 52px)",
+              fontWeight: 900, lineHeight: 1.1,
+              letterSpacing: "-0.02em", marginBottom: 24,
+            }}>
+              Stop shipping into the void.
+            </h2>
+            <p style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 16,
+              lineHeight: 1.85, color: "rgba(240,236,228,0.45)",
+              maxWidth: 480, marginBottom: 44,
+            }}>
+              If you're building with real intent but no traction — or burning tokens on features
+              nobody asked for — one conversation can change the direction.
+            </p>
+            <BookButton />
+            <p style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 14,
+              color: "rgba(240,236,228,0.2)", marginTop: 16, letterSpacing: "0.05em",
+            }}>
+              Or reach out directly:{" "}
+              <a href="mailto:john@valuedesigner.io" style={{ color: A.teal, textDecoration: "none" }}>
+                john@valuedesigner.io
+              </a>
+            </p>
+          </Inner>
         </section>
       </Fade>
 
       {/* ── FOOTER ── */}
       <footer style={{
         borderTop: "1px solid rgba(0,232,184,0.07)",
-        padding: "28px 48px", zIndex: 1, position: "relative",
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        flexWrap: "wrap", gap: 12,
+        zIndex: 1, position: "relative",
       }}>
-        <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 13 }}>
-          Value<span className="aurora-text">Designer</span>
-        </span>
-        <span style={{
-          fontFamily: "'DM Mono', monospace", fontSize: 13,
-          letterSpacing: "0.1em", color: "rgba(240,236,228,0.18)",
-          textTransform: "uppercase",
-        }}>
-          Design services that are loved &amp; trusted
-        </span>
+        <Inner style={{ padding: "0 48px" }}>
+          <div style={{
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+            flexWrap: "wrap", gap: 12, height: 72,
+          }}>
+            <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 13 }}>
+              Value<span className="aurora-text">Designer</span>
+            </span>
+            <span style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 13,
+              letterSpacing: "0.1em", color: "rgba(240,236,228,0.18)",
+              textTransform: "uppercase",
+            }}>
+              Design services that are loved &amp; trusted
+            </span>
+          </div>
+        </Inner>
       </footer>
     </div>
   );
