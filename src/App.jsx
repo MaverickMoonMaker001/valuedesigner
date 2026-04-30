@@ -138,8 +138,19 @@ export default function App() {
         backdropFilter: "blur(12px)",
         borderBottom: "1px solid rgba(0,232,184,0.08)",
       }}>
-        <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 15 }}>
-          Value<span className="aurora-text">Designer</span>
+        <span style={{
+          fontFamily: "'Playfair Display', serif",
+          fontWeight: 700,
+          fontSize: 15,
+          letterSpacing: "0.18em",
+          textTransform: "uppercase",
+          background: "linear-gradient(120deg, #00e8b8 0%, #38bdf8 40%, #a78bfa 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+          filter: "drop-shadow(0 0 8px rgba(0,232,184,0.5))",
+        }}>
+          ValueDesigner
         </span>
         <BookButton label="Book a free call →" style={{ padding: "10px 22px", fontSize: 10 }} />
       </nav>
