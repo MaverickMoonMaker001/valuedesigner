@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@300;400&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1280px; height: 640px; overflow: hidden; }
+  body {
+    font-family: 'Georgia', serif;
+    background: #07080f;
+    color: #f0ece4;
+    width: 1280px;
+    height: 640px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 80px 96px;
+  }
+  .aurora-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 90% 10%, rgba(0,232,184,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 10% 90%, rgba(167,139,250,0.13) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 55% 50%, rgba(74,222,128,0.06) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .border-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00e8b8 0%, #a78bfa 100%);
+  }
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+  }
+  .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #00e8b8;
+    margin-bottom: 28px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+  .aurora-text {
+    background: linear-gradient(120deg, #00e8b8 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(240,236,228,0.5);
+    max-width: 480px;
+  }
+  .logo {
+    position: absolute;
+    bottom: 52px;
+    right: 96px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 18px;
+    z-index: 1;
+  }
+  .cta {
+    position: absolute;
+    bottom: 56px;
+    left: 96px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: #00e8b8;
+    color: #0a0a0a;
+    font-weight: 600;
+    padding: 14px 28px;
+    z-index: 1;
+  }
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,232,184,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,232,184,0.03) 1px, transparent 1px);
+    background-size: 64px 64px;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+  <div class="aurora-bg"></div>
+  <div class="grid-lines"></div>
+  <div class="border-top"></div>
+
+  <div class="content">
+    <p class="label">For founders building with AI</p>
+    <h1>
+      You're shipping features.<br>
+      <em class="aurora-text">Not solving problems.</em>
+    </h1>
+    <p class="sub">Identify the gap between what you're building<br>and the value users actually get. Free 15-min call.</p>
+  </div>
+
+  <div class="cta">Book a free call →</div>
+
+  <div class="logo">Value<span class="aurora-text">Designer</span></div>
+</body>
+</html>
