@@ -29,18 +29,28 @@ export default function BlurText({
   const ref = useRef(null);
 
   useEffect(() => {
-    if (!ref.current) return;
+    const el = ref.current;
+    if (!el) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
-          observer.unobserve(ref.current);
+          observer.unobserve(el);
         }
       },
       { threshold, rootMargin }
     );
-    observer.observe(ref.current);
-    return () => observer.disconnect();
+
+    // Small delay so the element is fully painted before observing
+    const raf = requestAnimationFrame(() => {
+      observer.observe(el);
+    });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      observer.disconnect();
+    };
   }, [threshold, rootMargin]);
 
   const defaultFrom = useMemo(
@@ -68,7 +78,7 @@ export default function BlurText({
   );
 
   return (
-    <p ref={ref} className={`blur-text ${className}`} style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <p ref={ref} className={`blur-text ${className}`} style={{ display: 'flex', flexWrap: 'wrap', margin: 0 }}>
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
         return (
