@@ -198,13 +198,13 @@ export default function App() {
               letterSpacing: "-0.02em", marginBottom: 36,
             }}>
               <BlurText
-                text="You're shipping features."
+                text="You're shipping features fast."
                 delay={60}
                 direction="top"
                 stepDuration={0.4}
               />
               <BlurText
-                text="Not solving problems."
+                text="Are users signing up?"
                 delay={60}
                 direction="top"
                 stepDuration={0.4}
