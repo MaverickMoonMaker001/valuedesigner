@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import BlurText from "./components/BlurText";
 
-// ── Aurora palette ────────────────────────────────────────────────
+// ── Maverick Moon palette ─────────────────────────────────────────
 const A = {
-  teal:     "#00e8b8",
-  violet:   "#a78bfa",
-  green:    "#4ade80",
-  grad:     "linear-gradient(120deg, #00e8b8 0%, #a78bfa 100%)",
-  gradSoft: "linear-gradient(120deg, rgba(0,232,184,0.12) 0%, rgba(167,139,250,0.12) 100%)",
-  glowT:    "0 0 24px rgba(0,232,184,0.35)",
+  teal:     "#009CAD",
+  violet:   "#4495D1",
+  green:    "#F48587",
+  grad:     "linear-gradient(120deg, #009CAD 0%, #4495D1 100%)",
+  gradSoft: "linear-gradient(120deg, rgba(0,156,173,0.10) 0%, rgba(68,149,209,0.10) 100%)",
+  glowT:    "0 0 24px rgba(0,156,173,0.4)",
 };
 
 const BOOKING_URL = "https://calendar.app.google/L56EZxL43HpdCawa6";
@@ -101,8 +101,8 @@ export default function App() {
   return (
     <div style={{
       fontFamily: "'Georgia', serif",
-      background: "#07080f",
-      color: "#f0ece4",
+      background: "#000000",
+      color: "#FFFFFF",
       minHeight: "100vh",
     }}>
       <style>{`
@@ -111,10 +111,10 @@ export default function App() {
         html { scroll-behavior: smooth; }
         body { overflow-x: hidden; }
         ::-webkit-scrollbar { width: 2px; }
-        ::-webkit-scrollbar-thumb { background: #00e8b8; }
+        ::-webkit-scrollbar-thumb { background: #009CAD; }
         a { color: inherit; }
         .aurora-text {
-          background: linear-gradient(120deg, #00e8b8 0%, #a78bfa 100%);
+          background: linear-gradient(120deg, #009CAD 0%, #4495D1 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -129,22 +129,22 @@ export default function App() {
         }
       `}</style>
 
-      {/* ── Ambient aurora wash ── */}
+      {/* ── Ambient wash ── */}
       <div style={{
         position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0,
         background: `
-          radial-gradient(ellipse 70% 50% at 85% 20%, rgba(0,232,184,0.07) 0%, transparent 60%),
-          radial-gradient(ellipse 50% 60% at 15% 80%, rgba(167,139,250,0.08) 0%, transparent 60%),
-          radial-gradient(ellipse 40% 30% at 60% 55%, rgba(74,222,128,0.04) 0%, transparent 55%)
+          radial-gradient(ellipse 70% 50% at 85% 20%, rgba(0,156,173,0.09) 0%, transparent 60%),
+          radial-gradient(ellipse 50% 60% at 15% 80%, rgba(68,149,209,0.09) 0%, transparent 60%),
+          radial-gradient(ellipse 40% 30% at 60% 55%, rgba(42,76,97,0.12) 0%, transparent 55%)
         `,
       }} />
 
       {/* ── NAV ── */}
       <nav className="nav-inner" style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: "rgba(7,8,15,0.88)",
+        background: "rgba(0,0,0,0.90)",
         backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(0,232,184,0.08)",
+        borderBottom: "1px solid rgba(0,156,173,0.12)",
       }}>
         <Inner style={{ padding: "0 48px" }}>
           <div style={{
@@ -157,11 +157,11 @@ export default function App() {
               fontSize: 15,
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              background: "linear-gradient(120deg, #00e8b8 0%, #38bdf8 40%, #a78bfa 100%)",
+              background: "linear-gradient(120deg, #009CAD 0%, #9ED4E4 40%, #4495D1 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              filter: "drop-shadow(0 0 8px rgba(0,232,184,0.5))",
+              filter: "drop-shadow(0 0 8px rgba(0,156,173,0.5))",
             }}>
               ValueDesigner
             </span>
@@ -219,7 +219,7 @@ export default function App() {
 
             <div style={{
               fontFamily: "'DM Mono', monospace", fontSize: 17,
-              lineHeight: 1.85, color: "rgba(240,236,228,0.55)",
+              lineHeight: 1.85, color: "rgba(255,255,255,0.55)",
               marginBottom: 16,
             }}>
               <BlurText
@@ -232,7 +232,7 @@ export default function App() {
 
             <div style={{
               fontFamily: "'DM Mono', monospace", fontSize: 17,
-              lineHeight: 1.85, color: "rgba(240,236,228,0.55)",
+              lineHeight: 1.85, color: "rgba(255,255,255,0.55)",
               marginBottom: 52,
             }}>
               <BlurText
@@ -247,7 +247,7 @@ export default function App() {
 
             <p style={{
               fontFamily: "'DM Mono', monospace", fontSize: 14,
-              color: "rgba(240,236,228,0.22)", marginTop: 16, letterSpacing: "0.05em",
+              color: "rgba(255,255,255,0.22)", marginTop: 16, letterSpacing: "0.05em",
             }}>
               Free. No pitch. You'll leave with something useful.
             </p>
@@ -259,7 +259,7 @@ export default function App() {
       <Fade>
         <section style={{
           width: "100%", position: "relative", zIndex: 1,
-          borderTop: "1px solid rgba(0,232,184,0.08)",
+          borderTop: "1px solid rgba(0,156,173,0.12)",
         }}>
           <Inner style={{ paddingTop: 100, paddingBottom: 100 }}>
             <Label>The problem</Label>
@@ -273,7 +273,7 @@ export default function App() {
 
             <div className="two-col" style={{
               display: "grid", gridTemplateColumns: "1fr 1fr",
-              gap: 1, background: "rgba(0,232,184,0.06)", marginBottom: 56,
+              gap: 1, background: "rgba(42,76,97,0.35)", marginBottom: 56,
             }}>
               {[
                 {
@@ -289,18 +289,18 @@ export default function App() {
               ].map(({ label, body, dim }) => (
                 <div key={label} style={{
                   padding: "40px 36px",
-                  background: dim ? "rgba(240,236,228,0.01)" : "rgba(0,232,184,0.04)",
+                  background: dim ? "rgba(255,255,255,0.01)" : "rgba(0,156,173,0.06)",
                 }}>
                   <p style={{
                     fontFamily: "'DM Mono', monospace", fontSize: 13,
                     letterSpacing: "0.15em", textTransform: "uppercase",
-                    color: dim ? "rgba(240,236,228,0.25)" : A.teal,
+                    color: dim ? "rgba(255,255,255,0.25)" : A.teal,
                     marginBottom: 20,
                   }}>{label}</p>
                   <p style={{
                     fontFamily: "'Playfair Display', serif",
                     fontStyle: "italic", fontSize: 19, lineHeight: 1.65,
-                    color: dim ? "rgba(240,236,228,0.3)" : "rgba(240,236,228,0.85)",
+                    color: dim ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.85)",
                   }}>{body}</p>
                 </div>
               ))}
@@ -308,7 +308,7 @@ export default function App() {
 
             <p style={{
               fontFamily: "'DM Mono', monospace", fontSize: 16,
-              lineHeight: 1.85, color: "rgba(240,236,228,0.4)", maxWidth: 560,
+              lineHeight: 1.85, color: "rgba(255,255,255,0.4)", maxWidth: 560,
             }}>
               This isn't a failure of execution. It's a missing conversation — between what you're
               building and what someone actually needs. That's a solvable problem.
@@ -322,7 +322,7 @@ export default function App() {
       <Fade>
         <section style={{
           width: "100%", position: "relative", zIndex: 1,
-          borderTop: "1px solid rgba(167,139,250,0.08)",
+          borderTop: "1px solid rgba(68,149,209,0.12)",
         }}>
           <Inner style={{ paddingTop: 100, paddingBottom: 100 }}>
             <Label color={A.violet}>The work</Label>
@@ -335,7 +335,7 @@ export default function App() {
             </h2>
             <p style={{
               fontFamily: "'DM Mono', monospace", fontSize: 16,
-              lineHeight: 1.85, color: "rgba(240,236,228,0.4)",
+              lineHeight: 1.85, color: "rgba(255,255,255,0.4)",
               maxWidth: 520, marginBottom: 60,
             }}>
               Less guessing. Less wasted tokens. Less building in circles.
@@ -363,7 +363,7 @@ export default function App() {
               <div key={n} className="work-item" style={{
                 display: "grid", gridTemplateColumns: "72px 1fr",
                 gap: 24, marginBottom: 44, paddingBottom: 44,
-                borderBottom: "1px solid rgba(240,236,228,0.05)",
+                borderBottom: "1px solid rgba(255,255,255,0.05)",
               }}>
                 <span style={{
                   fontFamily: "'Playfair Display', serif",
@@ -377,7 +377,7 @@ export default function App() {
                   }}>{title}</h3>
                   <p style={{
                     fontFamily: "'DM Mono', monospace", fontSize: 16,
-                    lineHeight: 1.8, color: "rgba(240,236,228,0.45)",
+                    lineHeight: 1.8, color: "rgba(255,255,255,0.45)",
                   }}>{body}</p>
                 </div>
               </div>
@@ -390,7 +390,7 @@ export default function App() {
       <Fade>
         <section style={{
           width: "100%", position: "relative", zIndex: 1,
-          borderTop: "1px solid rgba(74,222,128,0.08)",
+          borderTop: "1px solid rgba(244,133,135,0.10)",
           background: A.gradSoft,
         }}>
           <Inner style={{ paddingTop: 100, paddingBottom: 100 }}>
@@ -405,7 +405,7 @@ export default function App() {
 
             <div className="three-col" style={{
               display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-              gap: 1, background: "rgba(0,232,184,0.06)", marginBottom: 48,
+              gap: 1, background: "rgba(42,76,97,0.35)", marginBottom: 48,
             }}>
               {[
                 {
@@ -429,7 +429,7 @@ export default function App() {
                   }}>{step}</p>
                   <p style={{
                     fontFamily: "'DM Mono', monospace", fontSize: 16,
-                    lineHeight: 1.8, color: "rgba(240,236,228,0.5)",
+                    lineHeight: 1.8, color: "rgba(255,255,255,0.5)",
                   }}>{body}</p>
                 </div>
               ))}
@@ -444,7 +444,7 @@ export default function App() {
       <Fade>
         <section style={{
           width: "100%", position: "relative", zIndex: 1,
-          borderTop: "1px solid rgba(167,139,250,0.08)",
+          borderTop: "1px solid rgba(68,149,209,0.12)",
         }}>
           <Inner style={{ paddingTop: 100, paddingBottom: 120 }}>
             <h2 style={{
@@ -457,7 +457,7 @@ export default function App() {
             </h2>
             <p style={{
               fontFamily: "'DM Mono', monospace", fontSize: 16,
-              lineHeight: 1.85, color: "rgba(240,236,228,0.45)",
+              lineHeight: 1.85, color: "rgba(255,255,255,0.45)",
               maxWidth: 480, marginBottom: 44,
             }}>
               If you're building with real intent but no traction — or burning tokens on features
@@ -466,7 +466,7 @@ export default function App() {
             <BookButton />
             <p style={{
               fontFamily: "'DM Mono', monospace", fontSize: 14,
-              color: "rgba(240,236,228,0.2)", marginTop: 16, letterSpacing: "0.05em",
+              color: "rgba(255,255,255,0.2)", marginTop: 16, letterSpacing: "0.05em",
             }}>
               Or reach out directly:{" "}
               <a href="mailto:john@valuedesigner.io" style={{ color: A.teal, textDecoration: "none" }}>
@@ -479,7 +479,7 @@ export default function App() {
 
       {/* ── FOOTER ── */}
       <footer style={{
-        borderTop: "1px solid rgba(0,232,184,0.07)",
+        borderTop: "1px solid rgba(0,156,173,0.12)",
         zIndex: 1, position: "relative",
       }}>
         <Inner style={{ padding: "0 48px" }}>
@@ -492,7 +492,7 @@ export default function App() {
             </span>
             <span style={{
               fontFamily: "'DM Mono', monospace", fontSize: 13,
-              letterSpacing: "0.1em", color: "rgba(240,236,228,0.18)",
+              letterSpacing: "0.1em", color: "rgba(255,255,255,0.18)",
               textTransform: "uppercase",
             }}>
               Design services that are loved &amp; trusted
