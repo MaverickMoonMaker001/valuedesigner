@@ -468,9 +468,6 @@ export default function App() {
               fontFamily: "'DM Mono', monospace", fontSize: 14,
               color: "rgba(255,255,255,0.2)", marginTop: 16, letterSpacing: "0.05em",
             }}>
-              Or reach out directly:{" "}
-              <a href="mailto:john@valuedesigner.io" style={{ color: A.teal, textDecoration: "none" }}>
-                john@valuedesigner.io
               </a>
             </p>
           </Inner>
