@@ -358,38 +358,34 @@ export default function App() {
             }}>
               Identify the gap.<br />Design to close it.
             </h2>
-            <p style={{
-              fontFamily: "'DM Mono', monospace", fontSize: 16,
-              lineHeight: 1.85, color: "rgba(255,255,255,0.4)",
-              maxWidth: 520, marginBottom: 60,
-            }}>
-              Less guessing. Less wasted tokens. Less building in circles.
-              A clear value proposition changes what you prioritize, what you ship,
-              and how users talk about you.
-            </p>
-
             {[
               {
                 n: "01", color: A.teal,
                 title: "Surface the real pain",
                 body: "Separate what users say from what they actually feel. Explicit pains get you acquired. Latent pains keep users around. Most founders only see one.",
+                image: "/image.png",
               },
               {
                 n: "02", color: A.violet,
                 title: "Audit the gap",
                 body: "Map what your product delivers against what users are actually getting. This is the exercise most teams never run — and it's exactly where lost traction hides.",
+                image: null,
               },
               {
                 n: "03", color: A.green,
                 title: "Build a value story worth shipping toward",
                 body: "A clear, testable proposition that your roadmap can point to. Before the next feature. Before the next sprint.",
+                image: null,
               },
-            ].map(({ n, color, title, body }) => (
-              <div key={n} className="work-item" style={{
-                display: "grid", gridTemplateColumns: "72px 1fr",
-                gap: 24, marginBottom: 44, paddingBottom: 44,
+            ].map(({ n, color, title, body, image }) => (
+              <div key={n} style={{
+                marginBottom: 44, paddingBottom: 44,
                 borderBottom: "1px solid rgba(255,255,255,0.05)",
               }}>
+                <div className="work-item" style={{
+                  display: "grid", gridTemplateColumns: "72px 1fr",
+                  gap: 24,
+                }}>
                 <span style={{
                   fontFamily: "'Playfair Display', serif",
                   fontSize: 28, fontWeight: 900,
@@ -405,6 +401,21 @@ export default function App() {
                     lineHeight: 1.8, color: "rgba(255,255,255,0.45)",
                   }}>{body}</p>
                 </div>
+                </div>
+                {image && (
+                  <div style={{ paddingLeft: 96, marginTop: 36 }}>
+                    <img
+                      src={image}
+                      alt=""
+                      style={{
+                        width: "100%",
+                        maxWidth: 520,
+                        display: "block",
+                        border: "1px solid rgba(0,156,173,0.15)",
+                      }}
+                    />
+                  </div>
+                )}
               </div>
             ))}
           </Inner>
