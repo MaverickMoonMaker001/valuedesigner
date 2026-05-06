@@ -622,7 +622,7 @@ export default function App() {
                   label: "The Engagement",
                   desc: "Value is being created somewhere in your customer journey. It's also being lost somewhere. We find both.",
                   builtFor: "Teams and organizations that need systematic clarity — where in the customer journey value is delivered, where it leaks, and what to do about it.",
-                  format: "8–16 hrs / month\nStructured project engagement",
+                  format: "custom hrs / month\nStructured project engagement",
                   walkAway: [
                     "Full customer journey value map",
                     "Identified acquisition & retention gaps",
