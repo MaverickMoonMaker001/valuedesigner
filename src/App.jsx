@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import BlurText from "./components/BlurText";
+import { supabase } from "./supabaseClient";
 
 // ── Maverick Moon palette ─────────────────────────────────────────
 const A = {
@@ -97,6 +99,17 @@ function Fade({ children }) {
 }
 
 export default function App() {
+  const [latestArticles, setLatestArticles] = useState([]);
+
+  useEffect(() => {
+    supabase
+      .from("articles")
+      .select("id, slug, title, subtitle, category, published_date, read_time_minutes")
+      .eq("is_published", true)
+      .order("published_date", { ascending: false })
+      .limit(3)
+      .then(({ data }) => setLatestArticles(data || []));
+  }, []);
 
   return (
     <div style={{
@@ -151,20 +164,32 @@ export default function App() {
             display: "flex", justifyContent: "space-between", alignItems: "center",
             height: 68,
           }}>
-            <span style={{
-              fontFamily: "'Playfair Display', serif",
-              fontWeight: 700,
-              fontSize: 15,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              background: "linear-gradient(120deg, #009CAD 0%, #9ED4E4 40%, #4495D1 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              filter: "drop-shadow(0 0 8px rgba(0,156,173,0.5))",
-            }}>
-              ValueDesigner
-            </span>
+            <div style={{ display: "flex", alignItems: "center", gap: 40 }}>
+              <span style={{
+                fontFamily: "'Playfair Display', serif",
+                fontWeight: 700,
+                fontSize: 15,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                background: "linear-gradient(120deg, #009CAD 0%, #9ED4E4 40%, #4495D1 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                filter: "drop-shadow(0 0 8px rgba(0,156,173,0.5))",
+              }}>
+                ValueDesigner
+              </span>
+              <Link to="/thinking" style={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: 13,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.45)",
+                textDecoration: "none",
+              }}>
+                Thinking
+              </Link>
+            </div>
             <BookButton label="Book a free call →" style={{ padding: "10px 22px", fontSize: 13 }} />
           </div>
         </Inner>
@@ -477,6 +502,95 @@ export default function App() {
         </section>
       </Fade>
 
+      {/* ── LATEST THINKING ── */}
+      {latestArticles.length > 0 && (
+        <Fade>
+          <section style={{
+            width: "100%", position: "relative", zIndex: 1,
+            borderTop: "1px solid rgba(0,156,173,0.12)",
+          }}>
+            <Inner style={{ paddingTop: 100, paddingBottom: 100 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 56 }}>
+                <Label>Latest thinking</Label>
+                <Link to="/thinking" style={{
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: 13,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: A.teal,
+                  textDecoration: "none",
+                }}>
+                  All articles →
+                </Link>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 1, background: "rgba(42,76,97,0.2)" }}>
+                {latestArticles.map((article) => (
+                  <Link
+                    key={article.id}
+                    to={`/thinking/${article.slug}`}
+                    style={{ textDecoration: "none", color: "inherit", display: "block" }}
+                  >
+                    <div style={{
+                      padding: "32px 36px",
+                      background: "rgba(0,0,0,0.5)",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "flex-start",
+                      gap: 32,
+                      transition: "background 0.2s",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = "rgba(0,156,173,0.06)"}
+                    onMouseLeave={e => e.currentTarget.style.background = "rgba(0,0,0,0.5)"}
+                    >
+                      <div style={{ flex: 1 }}>
+                        <span style={{
+                          fontFamily: "'DM Mono', monospace",
+                          fontSize: 11,
+                          letterSpacing: "0.18em",
+                          textTransform: "uppercase",
+                          color: A.teal,
+                          display: "block",
+                          marginBottom: 10,
+                        }}>
+                          {article.category}
+                        </span>
+                        <h3 style={{
+                          fontFamily: "'Playfair Display', serif",
+                          fontSize: 20,
+                          fontWeight: 700,
+                          lineHeight: 1.3,
+                          marginBottom: 8,
+                        }}>
+                          {article.title}
+                        </h3>
+                        <p style={{
+                          fontFamily: "'DM Mono', monospace",
+                          fontSize: 14,
+                          lineHeight: 1.7,
+                          color: "rgba(255,255,255,0.35)",
+                          maxWidth: 480,
+                        }}>
+                          {article.subtitle}
+                        </p>
+                      </div>
+                      <span style={{
+                        fontFamily: "'DM Mono', monospace",
+                        fontSize: 18,
+                        color: "rgba(255,255,255,0.2)",
+                        paddingTop: 4,
+                        flexShrink: 0,
+                      }}>
+                        →
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </Inner>
+          </section>
+        </Fade>
+      )}
+
       {/* ── FOOTER ── */}
       <footer style={{
         borderTop: "1px solid rgba(0,156,173,0.12)",
@@ -490,13 +604,25 @@ export default function App() {
             <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 13 }}>
               Value<span className="aurora-text">Designer</span>
             </span>
-            <span style={{
-              fontFamily: "'DM Mono', monospace", fontSize: 13,
-              letterSpacing: "0.1em", color: "rgba(255,255,255,0.18)",
-              textTransform: "uppercase",
-            }}>
-              Design services that are loved &amp; trusted
-            </span>
+            <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+              <Link to="/thinking" style={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: 13,
+                letterSpacing: "0.1em",
+                color: "rgba(255,255,255,0.25)",
+                textDecoration: "none",
+                textTransform: "uppercase",
+              }}>
+                Thinking
+              </Link>
+              <span style={{
+                fontFamily: "'DM Mono', monospace", fontSize: 13,
+                letterSpacing: "0.1em", color: "rgba(255,255,255,0.18)",
+                textTransform: "uppercase",
+              }}>
+                Design services that are loved &amp; trusted
+              </span>
+            </div>
           </div>
         </Inner>
       </footer>
