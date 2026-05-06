@@ -565,6 +565,163 @@ export default function App() {
         </Fade>
       )}
 
+      {/* ── THREE WAYS TO ENGAGE ── */}
+      <Fade>
+        <section style={{
+          width: "100%", position: "relative", zIndex: 1,
+          borderTop: "1px solid rgba(0,156,173,0.12)",
+        }}>
+          <Inner style={{ paddingTop: 100, paddingBottom: 100 }}>
+            <p style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 12,
+              letterSpacing: "0.2em", textTransform: "uppercase",
+              color: A.teal, marginBottom: 20,
+            }}>How to work with me</p>
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(26px, 3.5vw, 42px)",
+              fontWeight: 700, lineHeight: 1.2, marginBottom: 56,
+            }}>
+              Three ways to engage.<br />Each one built around your situation.
+            </h2>
+            <div className="three-col" style={{
+              display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
+              gap: 1, background: "rgba(42,76,97,0.35)", marginBottom: 32,
+            }}>
+              {[
+                {
+                  color: A.teal,
+                  label: "The Session",
+                  desc: "You're building something real. You're not sure what value it's actually delivering. Let's find out.",
+                  builtFor: "Solo founders and builders who want to do the work themselves — they just need the right questions asked first.",
+                  format: "One 90-min recorded session\n+ written report delivered async",
+                  walkAway: [
+                    "Your value gap — clearly named",
+                    "The explicit & latent pains in play",
+                    "A written report to act on",
+                  ],
+                  cta: "Book a session →",
+                },
+                {
+                  color: A.violet,
+                  label: "Trusted Adviser",
+                  badge: "Most requested",
+                  desc: "Someone in your corner who asks the hard questions — every week, before you build the wrong thing.",
+                  builtFor: "Founders at an inflection point — early traction, a pivot, or a product that's working but not growing. You need a strategic partner, not another tool.",
+                  format: "2–4 hrs / week\nOngoing retainer · Cancel anytime",
+                  walkAway: [
+                    "Weekly clarity on what to build next",
+                    "Coaching + mentorship built in",
+                    "Ongoing value prop refinement",
+                    "A thinking partner with no agenda",
+                  ],
+                  cta: "Start the conversation →",
+                },
+                {
+                  color: A.green,
+                  label: "The Engagement",
+                  desc: "Value is being created somewhere in your customer journey. It's also being lost somewhere. We find both.",
+                  builtFor: "Teams and organizations that need systematic clarity — where in the customer journey value is delivered, where it leaks, and what to do about it.",
+                  format: "8–16 hrs / month\nStructured project engagement",
+                  walkAway: [
+                    "Full customer journey value map",
+                    "Identified acquisition & retention gaps",
+                    "Prioritized recommendations",
+                    "A team that sees what users see",
+                  ],
+                  cta: "Let's scope it →",
+                },
+              ].map(({ color, label, badge, desc, builtFor, format, walkAway, cta }) => (
+                <div key={label} style={{
+                  padding: "36px 28px", background: "rgba(0,0,0,0.5)",
+                  display: "flex", flexDirection: "column", gap: 0,
+                  position: "relative",
+                  outline: color === A.violet ? `1px solid rgba(68,149,209,0.4)` : "none",
+                }}>
+                  {badge && (
+                    <span style={{
+                      fontFamily: "'DM Mono', monospace", fontSize: 11,
+                      letterSpacing: "0.15em", textTransform: "uppercase",
+                      color: "#0a0a0a", background: color,
+                      padding: "4px 12px", display: "inline-block",
+                      alignSelf: "flex-start", marginBottom: 20,
+                    }}>{badge}</span>
+                  )}
+                  <h3 style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: 26, fontWeight: 700,
+                    color, lineHeight: 1.2, marginBottom: 16,
+                  }}>{label}</h3>
+                  <p style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontStyle: "italic", fontSize: 16, lineHeight: 1.7,
+                    color: "rgba(255,255,255,0.75)", marginBottom: 28,
+                  }}>{desc}</p>
+                  <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 20, marginBottom: 16 }}>
+                    <p style={{
+                      fontFamily: "'DM Mono', monospace", fontSize: 11,
+                      letterSpacing: "0.15em", textTransform: "uppercase",
+                      color, marginBottom: 10,
+                    }}>Built for</p>
+                    <p style={{
+                      fontFamily: "'DM Mono', monospace", fontSize: 14,
+                      lineHeight: 1.75, color: "rgba(255,255,255,0.45)",
+                    }}>{builtFor}</p>
+                  </div>
+                  <div style={{ marginBottom: 16 }}>
+                    <p style={{
+                      fontFamily: "'DM Mono', monospace", fontSize: 11,
+                      letterSpacing: "0.15em", textTransform: "uppercase",
+                      color, marginBottom: 10,
+                    }}>Format</p>
+                    <p style={{
+                      fontFamily: "'DM Mono', monospace", fontSize: 14,
+                      lineHeight: 1.75, color: "rgba(255,255,255,0.7)",
+                      whiteSpace: "pre-line",
+                    }}>{format}</p>
+                  </div>
+                  <div style={{ marginBottom: 32 }}>
+                    <p style={{
+                      fontFamily: "'DM Mono', monospace", fontSize: 11,
+                      letterSpacing: "0.15em", textTransform: "uppercase",
+                      color, marginBottom: 14,
+                    }}>You walk away with</p>
+                    {walkAway.map((item) => (
+                      <div key={item} style={{ display: "flex", gap: 10, marginBottom: 10, alignItems: "flex-start" }}>
+                        <span style={{ color, flexShrink: 0, marginTop: 2 }}>—</span>
+                        <p style={{
+                          fontFamily: "'DM Mono', monospace", fontSize: 14,
+                          lineHeight: 1.65, color: "rgba(255,255,255,0.55)",
+                          margin: 0,
+                        }}>{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <a
+                    href={BOOKING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontFamily: "'DM Mono', monospace", fontSize: 13,
+                      letterSpacing: "0.12em", textTransform: "uppercase",
+                      background: color, color: "#0a0a0a", fontWeight: 600,
+                      padding: "14px 24px", textDecoration: "none",
+                      display: "inline-block", marginTop: "auto",
+                    }}
+                  >{cta}</a>
+                </div>
+              ))}
+            </div>
+            <p style={{
+              fontFamily: "'DM Mono', monospace", fontSize: 13,
+              color: "rgba(255,255,255,0.25)", letterSpacing: "0.05em",
+            }}>
+              All engagements begin with a free 15-min call. No pitch. You'll know if it's useful.
+            </p>
+          </Inner>
+        </section>
+      </Fade>
+
       {/* ── FOOTER ── */}
       <footer style={{
         borderTop: "1px solid rgba(0,156,173,0.12)",
