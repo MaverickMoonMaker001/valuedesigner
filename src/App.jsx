@@ -359,63 +359,26 @@ export default function App() {
               Identify the gap.<br />Design to close it.
             </h2>
             {[
-              {
-                n: "01", color: A.teal,
-                title: "Surface the real pain",
-                body: "Separate what users say from what they actually feel. Explicit pains get you acquired. Latent pains keep users around. Most founders only see one.",
-                image: "/image.png",
-              },
-              {
-                n: "02", color: A.violet,
-                title: "Audit the gap",
-                body: "Map what your product delivers against what users are actually getting. This is the exercise most teams never run — and it's exactly where lost traction hides.",
-                image: null,
-              },
-              {
-                n: "03", color: A.green,
-                title: "Build a value story worth shipping toward",
-                body: "A clear, testable proposition that your roadmap can point to. Before the next feature. Before the next sprint.",
-                image: null,
-              },
-            ].map(({ n, color, title, body, image }) => (
+              { n: "01", color: A.teal,    image: "/image.png" },
+              { n: "02", color: A.violet,  image: "/audit_the_gap.png" },
+              { n: "03", color: A.green,   image: "/Build_a_value_story.png" },
+            ].map(({ n, color, image }) => (
               <div key={n} style={{
                 marginBottom: 44, paddingBottom: 44,
                 borderBottom: "1px solid rgba(255,255,255,0.05)",
               }}>
-                <div className="work-item" style={{
-                  display: "grid", gridTemplateColumns: "72px 1fr",
-                  gap: 24,
-                }}>
-                <span style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: 28, fontWeight: 900,
-                  color, opacity: 0.4, lineHeight: 1, paddingTop: 4,
-                }}>{n}</span>
-                <div>
-                  <h3 style={{
+                <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
+                  <span style={{
                     fontFamily: "'Playfair Display', serif",
-                    fontSize: 22, fontWeight: 700, marginBottom: 12, color,
-                  }}>{title}</h3>
-                  <p style={{
-                    fontFamily: "'DM Mono', monospace", fontSize: 16,
-                    lineHeight: 1.8, color: "rgba(255,255,255,0.45)",
-                  }}>{body}</p>
+                    fontSize: 28, fontWeight: 900,
+                    color, opacity: 0.4, lineHeight: 1, paddingTop: 4, flexShrink: 0, width: 72,
+                  }}>{n}</span>
+                  <img
+                    src={image}
+                    alt=""
+                    style={{ width: "100%", maxWidth: 520, display: "block" }}
+                  />
                 </div>
-                </div>
-                {image && (
-                  <div style={{ paddingLeft: 96, marginTop: 36 }}>
-                    <img
-                      src={image}
-                      alt=""
-                      style={{
-                        width: "100%",
-                        maxWidth: 520,
-                        display: "block",
-                        border: "1px solid rgba(0,156,173,0.15)",
-                      }}
-                    />
-                  </div>
-                )}
               </div>
             ))}
           </Inner>
